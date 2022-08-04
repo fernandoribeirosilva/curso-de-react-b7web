@@ -8,6 +8,8 @@ function App() {
 
       <span className='username'>Olá Fernando</span>
 
+      <a href="#" target="_blank" className='link' >link</a>
+
       <C.Botao bg='#00FF00'>
         Clique aqui
       </C.Botao>
