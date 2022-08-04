@@ -8,6 +8,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   styled-components: ^5.3.5
+  styled-media-query: ^2.1.2
   typescript: ^4.6.4
   vite: ^3.0.0
 
@@ -15,6 +16,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 5.3.5_biqbaboplfbrettd7655fr4n2y
+  styled-media-query: 2.1.2_styled-components@5.3.5
 
 devDependencies:
   '@types/react': 18.0.15
@@ -945,6 +947,14 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: false
+
+  /styled-media-query/2.1.2_styled-components@5.3.5:
+    resolution: {integrity: sha512-ds24iBxOrfIhdHP+e23y6kj1gbosgWu+tgAuxvMrYmnp6Sju/LjuY8lfkiVnn6P7mcdhtwpC2Z43o+apT9UdJg==}
+    peerDependencies:
+      styled-components: '>= 1'
+    dependencies:
+      styled-components: 5.3.5_biqbaboplfbrettd7655fr4n2y
     dev: false
 
   /supports-color/5.5.0:
