@@ -1,0 +1,41 @@
+body {
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.headerContainer {
+   width: 100%;
+   max-width: 56.25rem;
+   margin: 2.5rem auto;
+   font-family: 'Open Sans', sans-serif;
+   font-size: .75rem;
+   color: #aaa9a9;
+   display: flex;
+   align-items: center;
+}
+
+.headerContainer h2 {
+   width: 4rem;
+   height: 2rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #207b9e;
+   color: #fefefe;
+   border-radius: .18rem;
+   margin-right: .5rem;
+}
+
+.container {
+   display: flex;
+   max-width: 56.25rem;
+   margin: auto;
+   gap: 5rem;
+}
+
+.container .leftSide {
+   flex: 1;
+}
+
+.container .rightSide {
+   flex: 1;
+}
