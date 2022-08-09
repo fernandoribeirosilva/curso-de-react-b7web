@@ -78,4 +78,13 @@ body {
 
 .container .rightSide {
    flex: 1;
+   margin-left: 2.5rem;
+   display: flex;
+}
+
+.container .rightSide .grid {
+   flex: 1;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 1.25rem;
 }

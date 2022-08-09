@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './App.module.css';
+import { GridItem } from './components/GridItem'
 
 import { calculateImc, levels } from './helpers/imc';
 
@@ -50,7 +51,11 @@ function App() {
             <button onClick={handleCalculateButton}>Calcular</button>
           </div>
           <div className={styles.rightSide}>
-            ...
+            <div className={styles.grid}>
+              {levels.map((item, key) => (
+                <GridItem key={key} item={item} />
+              ))}
+            </div>
           </div>
         </section>
       </main>
