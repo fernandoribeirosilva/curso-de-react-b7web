@@ -4,7 +4,7 @@ export interface Level {
    color: string;
    icon: 'down' | 'up';
    imc: number[];
-   yuoImc?: number;
+   yuorImc?: number;
 }
 
 export const levels: Level[] = [
@@ -14,12 +14,12 @@ export const levels: Level[] = [
    { title: 'Obesidade', color: '#C3423F', icon: 'down', imc: [30.1, 99] },
 ];
 
-export const calculateImc = (weight: number, height: number): Level | null => {
-   let imc = parseFloat((weight / (height * height)).toFixed(1));
+export const calculateImc = (weight: number, height: number) => {
+   let imc = weight / (height * height);
 
    for (let i in levels) {
       if (imc >= levels[i].imc[0] && imc < levels[i].imc[1]) {
-         levels[i].yuoImc = imc;
+         levels[i].yuorImc = parseFloat((imc).toFixed(2));
          return levels[i];
       }
    }
