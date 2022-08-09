@@ -2,7 +2,7 @@ body {
    font-family: Arial, Helvetica, sans-serif;
 }
 
-.headerContainer {
+.main header {
    width: 100%;
    max-width: 56.25rem;
    margin: 2.5rem auto;
@@ -13,7 +13,7 @@ body {
    align-items: center;
 }
 
-.headerContainer h2 {
+.main header h2 {
    width: 4rem;
    height: 2rem;
    display: flex;
@@ -87,4 +87,9 @@ body {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
    gap: 1.25rem;
+}
+
+.container .rightSide .rightBig {
+   flex: 1;
+   display: flex;
 }
