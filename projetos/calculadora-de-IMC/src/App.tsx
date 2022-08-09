@@ -2,14 +2,16 @@ import { useState } from 'react';
 import styles from './App.module.css';
 import { GridItem } from './components/GridItem'
 
-import { calculateImc, levels } from './helpers/imc';
+import { calculateImc, Level, levels } from './helpers/imc';
 
 function App() {
   const [heightField, setHeightField] = useState<number>(0);
   const [weightField, setWeightField] = useState<number>(0);
+  const [toShow, setToShow] = useState<Level | null>(null);
 
   const handleCalculateButton = () => {
     if (heightField && weightField) {
+      setToShow(calculateImc(weightField, heightField));
     } else {
       alert('Digite todos os campos.');
     }
@@ -18,7 +20,7 @@ function App() {
   return (
     <>
       <main className={styles.main}>
-        <header className={styles.headerContainer}>
+        <header>
           <h2>IMC</h2>
           powered by Fernando
         </header>
@@ -33,8 +35,6 @@ function App() {
             <input
               type="number"
               placeholder="Digite a sua altura. EX 1.5 (em metros)"
-              min={0}
-              max={200}
               value={heightField > 0 ? heightField : ''}
               onChange={e => setHeightField(parseFloat(e.target.value))}
             />
@@ -42,8 +42,6 @@ function App() {
             <input
               type="number"
               placeholder="Digite o sua peso. EX 75.3 (em kg)"
-              min={0}
-              max={200}
               value={weightField > 0 ? weightField : ''}
               onChange={e => setWeightField(parseFloat(e.target.value))}
             />
@@ -51,11 +49,19 @@ function App() {
             <button onClick={handleCalculateButton}>Calcular</button>
           </div>
           <div className={styles.rightSide}>
-            <div className={styles.grid}>
-              {levels.map((item, key) => (
-                <GridItem key={key} item={item} />
-              ))}
-            </div>
+            {!toShow &&
+              <div className={styles.grid}>
+                {levels.map((item, key) => (
+                  <GridItem key={key} item={item} />
+                ))}
+              </div>
+            }
+            {toShow &&
+              <div className={styles.rightBig}>
+                <div className={styles.rightArrow}></div>
+                <GridItem item={toShow} />
+              </div>
+            }
           </div>
         </section>
       </main>
