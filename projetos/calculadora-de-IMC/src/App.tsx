@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styles from './App.module.css';
 
+import { calculateImc, levels } from './helpers/imc';
+
 function App() {
   const [heightField, setHeightField] = useState<number>(0);
   const [weightField, setWeightField] = useState<number>(0);
