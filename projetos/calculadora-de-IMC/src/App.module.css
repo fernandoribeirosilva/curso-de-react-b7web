@@ -58,6 +58,10 @@ body {
    outline: none;
 }
 
+.container .leftSide input:disabled {
+   opacity: .5;
+}
+
 .container .leftSide button {
    width: 100%;
    background-color: #227C9D;
@@ -74,6 +78,11 @@ body {
 
 .container .leftSide button:hover {
    opacity: .8;
+}
+
+.container .leftSide button:disabled {
+   opacity: .5;
+   cursor: not-allowed;
 }
 
 .container .rightSide {
