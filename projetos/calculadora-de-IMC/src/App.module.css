@@ -93,3 +93,22 @@ body {
    flex: 1;
    display: flex;
 }
+
+.container .rightSide .rightArrow {
+   position: absolute;
+   background-color: #227C9D;
+   width: 4.375rem;
+   height: 4.375rem;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: -35px;
+   margin-top: 145px;
+   transition: all ease 300ms;
+}
+
+.container .rightSide .rightArrow:hover {
+   cursor: pointer;
+   scale: 1.1;
+}
