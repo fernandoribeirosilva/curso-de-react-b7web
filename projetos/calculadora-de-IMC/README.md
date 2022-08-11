@@ -13,3 +13,6 @@ Este projeto foi feito no curso da [B7Web](https://b7web.com.br).
  ```npm
 npm run start
  ```
+
+ ## Link do projeto
+ [calculadora de imc](https://calculadora-de-imc-xi.vercel.app/)
