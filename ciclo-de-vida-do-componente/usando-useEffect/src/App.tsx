@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 /* 
   1 - etapa do siclo de vida do componente (renderização)
@@ -15,7 +15,9 @@ import { useEffect, useState } from 'react'
 */
 
 function App() {
-  const [name, setName] = useState<string>('Pedro');
+  const [name, setName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [fullName, setFullName] = useState<string>('');
 
   // No useEffect, deve ser passado 2 parâmetros 
   // 1 - função que será executada.
@@ -24,20 +26,35 @@ function App() {
   //  estas dependência é a variável que será monitorada para saber se ela mudou o
   //  valor, ele vai ser executado novamente.
   useEffect(() => {
-    alert(`Olá`);
-  }, [name]);
+    setFullName(`${name} ${lastName}`);
+  }, [name, lastName]);
 
-  const handleClick = () => {
-    setName('Fernando');
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   }
 
+  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLastName(e.target.value);
+  }
+
+
   return (
-    <div className="flex flex-col items-center bg-slate-200 p-5">
-      <h1 className='mx-5'>Hello <span className='underline'>{name}</span></h1>
-      <button
-        className="w-60 h-11 bg-slate-400 text-white p-2 mx-5 mt-3 rounded hover:bg-slate-500 ease-in-out duration-300 "
-        onClick={handleClick}
-      >Mudar nome</button>
+    <div className="flex flex-col">
+      <input
+        type="text"
+        value={name}
+        placeholder="Digite o seu nome"
+        className="w-96 border-2 border-purple-700 my-2"
+        onChange={handleNameChange}
+      />
+      <input
+        type="text"
+        value={lastName}
+        placeholder="Digite o seu sobrenome"
+        className="w-96 border-2 border-purple-700 my-2"
+        onChange={handleLastNameChange}
+      />
+      <p className="mt-5">Nome Completo: {fullName}</p>
     </div>
   )
 }
