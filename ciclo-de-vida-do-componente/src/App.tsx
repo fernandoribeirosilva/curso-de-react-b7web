@@ -17,6 +17,12 @@ import { useEffect, useState } from 'react'
 function App() {
   const [name, setName] = useState<string>('Pedro');
 
+  // No useEffect, deve ser passado 2 parâmetros 
+  // 1 - função que será executada.
+  //  esta função deve ser executada quando o componente for renderizado ou criado.
+  //2 - array de dependências
+  //  estas dependência é a variável que será monitorada para saber se ela mudou o
+  //  valor, ele vai ser executado novamente.
   useEffect(() => {
     alert(`Olá`);
   }, [name]);
