@@ -5,20 +5,30 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
 
-
-  useEffect(() => {
-    fetch('https://api.b7web.com.br/cinema/')
-      .then(response => response.json())
-      .then(data => setMovies(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://api.b7web.com.br/cinema/')
+  //     .then(response => response.json())
+  //     .then(data => setMovies(data));
+  // }, []);
 
   useEffect(() => {
     if (movies) setLoading(!loading);
   }, [movies]);
 
+  useEffect(() => {
+    loadMovies();
+  }, []);
+
+  const loadMovies = async () => {
+    const res = await fetch('https://api.b7web.com.br/cinema/')
+    const data = await res.json();
+    setMovies(data);
+  };
+
   return (
     <div className='p-5'>
-      {loading ?
+      {loading
+        ?
         <div className='font-bold'>Carregando...</div>
         :
         <>
@@ -26,10 +36,10 @@ function App() {
             Total de Filmes: {movies.length}
           </div>
 
-          <div className="grid grid-cols-6 gap-3 ">
+          <div className="grid grid-cols-6 gap-8 ">
             {movies.map((movie, index) => (
               <div key={index}>
-                <img src={movie.avatar} alt="" className='w-36 block' />
+                <img src={movie.avatar} alt="" className='w-52 block' />
                 <span>{movie.titulo}</span>
               </div>
             ))}
