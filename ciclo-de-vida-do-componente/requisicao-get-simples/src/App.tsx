@@ -15,20 +15,42 @@ function App() {
     loadMovies();
   }, []);
 
+  // const loadMovies = () => {
+  //   setLoading(true);
+  //   fetch('https://api.b7web.com.br/cinema')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setMovies(data);
+  //       setLoading(false);
+  //     })
+  //     .catch(e => {
+  //       setLoading(false);
+  //       setMovies([]);
+  //       console.log(e);
+
+  //     })
+  // };
+
   const loadMovies = async () => {
-    setLoading(true);
-    const res = await fetch('https://api.b7web.com.br/cinema/')
-    const data = await res.json();
-    setLoading(false);
-    setMovies(data);
+    try {
+      setLoading(true);
+      const res = await fetch('https://api.b7web.com.br/cinema')
+      const data = await res.json();
+      setLoading(false);
+      setMovies(data);
+    } catch (error) {
+      setLoading(false);
+      setMovies([]);
+    }
   };
 
   return (
     <div className='p-5'>
-      {loading
-        ?
+      {loading &&
         <div className='font-bold'>Carregando...</div>
-        :
+      }
+
+      {!loading && movies.length > 0 &&
         <>
           <div className='mb-5 font-bold underline underline-offset-4'>
             Total de Filmes: {movies.length}
@@ -43,6 +65,10 @@ function App() {
             ))}
           </div>
         </>
+      }
+
+      {!loading && movies.length === 0 &&
+        <div>Tente mais tarde novamente</div>
       }
     </div>
   )
