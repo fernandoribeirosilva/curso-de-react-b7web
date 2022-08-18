@@ -12,16 +12,14 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    if (movies) setLoading(!loading);
-  }, [movies]);
-
-  useEffect(() => {
     loadMovies();
   }, []);
 
   const loadMovies = async () => {
+    setLoading(true);
     const res = await fetch('https://api.b7web.com.br/cinema/')
     const data = await res.json();
+    setLoading(false);
     setMovies(data);
   };
 
@@ -38,7 +36,7 @@ function App() {
 
           <div className="grid grid-cols-6 gap-8 ">
             {movies.map((movie, index) => (
-              <div key={index}>
+              <div key={index} className="mx-auto">
                 <img src={movie.avatar} alt="" className='w-52 block' />
                 <span>{movie.titulo}</span>
               </div>
