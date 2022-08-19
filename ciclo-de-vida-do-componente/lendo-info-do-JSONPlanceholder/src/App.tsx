@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { axiosInstance as axios } from './config/axios';
 import { Post } from './types/Post';
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     loadMovies();
@@ -12,14 +14,18 @@ function App() {
   const loadMovies = async () => {
     try {
       setLoading(true);
-      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-      const data = await res.json();
+      const res = await axios.get('/posts')
+      const { data } = res;
       setLoading(false);
       setPosts(data);
-    } catch (error) {
+    } catch (error: InstanceType<Error>) {
+      const message = error.response.data.error;
+      console.log('Error => ', error);
       setLoading(false);
+      setError(message);
     }
   };
+
 
   return (
     <div className='p-5'>
@@ -34,8 +40,8 @@ function App() {
           </div>
 
           <div>
-            {posts.map((item, index) => (
-              <div key={index} className="py-4">
+            {posts.map((item) => (
+              <div key={item.id} className="py-4">
                 <h4 className="font-bold">{item.title}</h4>
                 <small>#{item.id} - Usuário: {item.userId}</small>
                 <p>{item.body}</p>
@@ -46,7 +52,7 @@ function App() {
       }
 
       {!loading && posts.length === 0 &&
-        <div>Não há posts para exibir.</div>
+        <div>{error}</div>
       }
     </div>
   )
