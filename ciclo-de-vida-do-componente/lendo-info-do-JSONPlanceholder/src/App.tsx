@@ -52,7 +52,7 @@ function App() {
       }
 
       {!loading && posts.length === 0 &&
-        <div>{error}</div>
+        <div>Não tem post para mostra</div>
       }
     </div>
   )
