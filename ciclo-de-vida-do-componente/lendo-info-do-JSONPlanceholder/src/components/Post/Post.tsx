@@ -1,11 +1,11 @@
-import { Post as PostProps } from "../../types/Post"
+import { Post } from "../../types/Post"
 
-export const Post = ({
+export const PostItem = ({
    userId,
    id,
    title,
    body,
-}: PostProps) => {
+}: Post) => {
    return (
       <div className="py-4">
          <h4 className="font-bold">{title}</h4>

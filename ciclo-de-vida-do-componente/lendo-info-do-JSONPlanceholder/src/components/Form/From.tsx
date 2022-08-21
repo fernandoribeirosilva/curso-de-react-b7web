@@ -1,39 +1,31 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { axiosInstance as axios } from "../../config/axios";
 
-export const Form = () => {
+type Props = {
+   onAdd: (title: string, body: string) => void;
+}
+
+export const Form = ({ onAdd }: Props) => {
    const [addTitleText, setAddTitleText] = useState('');
    const [addBodyText, setAddBodyText] = useState('');
 
    const handleAddTitleText = (e: ChangeEvent<HTMLInputElement>) => {
       setAddTitleText(e.target.value);
    }
+
    const handleAddBodyText = (e: ChangeEvent<HTMLTextAreaElement>) => {
       setAddBodyText(e.target.value);
    }
-   const handleClick = async () => {
+
+   const handleClick = (e: ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
       if (!addTitleText && !addBodyText) {
          alert('Preencha todos os campos');
          return;
       }
-
-      const res = await axios.post('/posts',
-         {
-            title: addTitleText,
-            body: addBodyText,
-            userId: 1
-         },
-         { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      const { data } = res;
-      if (data.id) {
-         alert('Post criado com sucesso');
-         setAddTitleText('');
-         setAddBodyText('');
-      } else {
-         alert('Erro ao criar post');
-      }
+      onAdd(addTitleText, addBodyText);
+      setAddBodyText('');
+      setAddTitleText('');
    }
 
    return (

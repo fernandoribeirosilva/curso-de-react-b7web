@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Form } from './components/Form';
 import { Loading } from './components/Loading';
 import { Message } from './components/Message/Message';
-import { Post } from './components/Post';
+import { PostItem } from './components/Post';
 import { axiosInstance as axios } from './config/axios';
 import { Post as PostProps } from './types/Post';
 
@@ -27,12 +27,26 @@ function App() {
     }
   };
 
+  const handleAddPost = async (title: string, body: string) => {
+    const res = await axios.post('/posts',
+      { title, body, userId: 1 },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+
+    const { data } = res;
+    if (data.id) {
+      alert('Post criado com sucesso');
+    } else {
+      alert('Erro ao criar post');
+    }
+  }
+
 
   return (
     <div className='p-5'>
       {loading && <Loading />}
 
-      <Form />
+      <Form onAdd={handleAddPost} />
 
       {!loading && posts.length > 0 &&
         <>
@@ -42,7 +56,7 @@ function App() {
 
           <div>
             {posts.map((item) => (
-              <Post key={item.id} {...item} />
+              <PostItem key={item.id} {...item} />
             ))}
           </div>
         </>
