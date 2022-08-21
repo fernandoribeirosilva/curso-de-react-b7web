@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Form } from './components/Form';
-import { Loading } from './components/Loading';
-import { Message } from './components/Message/Message';
-import { PostItem } from './components/Post';
-import { Post } from './types/Post';
-import Api from './api';
+import { useEffect, useState } from "react";
+import Api from "./api";
+import { Form } from "./components/Form";
+import { Loading } from "./components/Loading";
+import { Message } from "./components/Message/Message";
+import { PostItem } from "./components/Post";
+import { Post } from "./types/Post";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ function App() {
       setLoading(false);
       setPosts(data);
     } catch (error: InstanceType<Error>) {
-      console.log('Error => ', error);
+      console.log("Error => ", error);
       setLoading(false);
     }
   };
@@ -30,22 +30,21 @@ function App() {
     const data = await Api.addNewPost(title, body, 1);
 
     if (data.id) {
-      alert('Post criado com sucesso');
+      alert("Post criado com sucesso");
     } else {
-      alert('Erro ao criar post');
+      alert("Erro ao criar post");
     }
-  }
-
+  };
 
   return (
-    <div className='p-5'>
+    <div className="p-5">
       {loading && <Loading />}
 
       <Form onAdd={handleAddPost} />
 
-      {!loading && posts.length > 0 &&
+      {!loading && posts.length > 0 && (
         <>
-          <div className='mb-2 font-bold underline underline-offset-4'>
+          <div className="mb-2 font-bold underline underline-offset-4">
             Total de Posts: {posts.length}
           </div>
 
@@ -55,15 +54,15 @@ function App() {
             ))}
           </div>
         </>
-      }
+      )}
 
-      {!loading && posts.length === 0 &&
-        <Message message='Não tem post para mostra' />
-      }
+      {!loading && posts.length === 0 && (
+        <Message message="Não tem post para mostra" />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 
 // https://api.b7web.com.br/cinema/
