@@ -1,68 +1,43 @@
-import { useEffect, useState } from "react";
-import Api from "./api";
-import { Form } from "./components/Form";
-import { Loading } from "./components/Loading";
-import { Message } from "./components/Message/Message";
-import { PostItem } from "./components/Post";
-import { Post } from "./types/Post";
+import { useReducer } from "react";
+/* 
+  quando eu quero trocar alguma informação de uma variável, incrementar ou mudar o nome
+  eu uso o useState. 
+
+  O Reducer tem o mesmo papel do useState, mas ele é mais complexo.
+
+  1 parâmetro - Ele recebe no primeiro parâmetro uma função.
+    Essa função recebe dois parâmetros sempre, no primeiro parâmetro o estado 
+    atual do reducer. E no segundo é que ação que eu vou executar. ou seja esta função
+    vai ser executada toda vez que eu precisar mudar o estado do reducer.
+
+  2 parâmetro - são os valores iniciais do meu reducer.
+*/
+
+type ReducerState = {
+  count: number;
+};
+type ReducerAction = {
+  type: "increment" | "decrement" | "reset";
+};
+
+const initialState = { count: 0 };
+const reducer = (state: ReducerState, action: ReducerAction) => {
+  switch (action.type) {
+    case "increment":
+      return { ...state, count: state.count++ };
+      break;
+    case "decrement":
+      return { ...state, count: state.count-- };
+      break;
+    case "reset":
+      return initialState;
+      break;
+  }
+};
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    loadMovies();
-  }, []);
-
-  const loadMovies = async () => {
-    try {
-      setLoading(true);
-      const data = await Api.getAllPost();
-      setLoading(false);
-      setPosts(data);
-    } catch (error: InstanceType<Error>) {
-      console.log("Error => ", error);
-      setLoading(false);
-    }
-  };
-
-  const handleAddPost = async (title: string, body: string) => {
-    const data = await Api.addNewPost(title, body, 1);
-
-    if (data.id) {
-      alert("Post criado com sucesso");
-    } else {
-      alert("Erro ao criar post");
-    }
-  };
-
-  return (
-    <div className="p-5">
-      {loading && <Loading />}
-
-      <Form onAdd={handleAddPost} />
-
-      {!loading && posts.length > 0 && (
-        <>
-          <div className="mb-2 font-bold underline underline-offset-4">
-            Total de Posts: {posts.length}
-          </div>
-
-          <div>
-            {posts.map((item) => (
-              <PostItem key={item.id} {...item} />
-            ))}
-          </div>
-        </>
-      )}
-
-      {!loading && posts.length === 0 && (
-        <Message message="Não tem post para mostra" />
-      )}
-    </div>
-  );
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return <div className="p-5"></div>;
 }
 
 export default App;
-
-// https://api.b7web.com.br/cinema/
