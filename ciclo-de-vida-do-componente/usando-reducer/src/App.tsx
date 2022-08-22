@@ -24,20 +24,50 @@ const initialState = { count: 0 };
 const reducer = (state: ReducerState, action: ReducerAction) => {
   switch (action.type) {
     case "increment":
-      return { ...state, count: state.count++ };
+      return { ...state, count: state.count + 1 };
       break;
     case "decrement":
-      return { ...state, count: state.count-- };
+      if (state.count > 0) return { ...state, count: state.count - 1 };
       break;
     case "reset":
       return initialState;
       break;
   }
+  return state;
 };
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  return <div className="p-5"></div>;
+
+  const increment = () => dispatch({ type: "increment" });
+  const decrement = () => dispatch({ type: "decrement" });
+  const reset = () => dispatch({ type: "reset" });
+
+  return (
+    <div className="p-5">
+      Contagem: {state.count}
+      <hr />
+      <button
+        className="m-3 p-3 border rounded bg-blue-400 transition ease-in-out hover:bg-blue-500 text-white"
+        onClick={increment}
+      >
+        Adicionar
+      </button>
+      <button
+        className="m-3 p-3 border rounded bg-blue-400 transition ease-in-out hover:bg-blue-500 text-white"
+        onClick={decrement}
+      >
+        Remover
+      </button>
+      &nbsp;
+      <button
+        className="m-3 p-3 border rounded bg-blue-400 transition ease-in-out hover:bg-blue-500 text-white"
+        onClick={reset}
+      >
+        Resetar
+      </button>
+    </div>
+  );
 }
 
 export default App;
