@@ -33,6 +33,19 @@ function App() {
     }
   };
 
+  const deletePerson = (id: string) => {
+    dispatch({
+      type: "DEL",
+      payload: { id },
+    });
+  };
+
+  const handleOrderButton = () => {
+    dispatch({
+      type: "ORDER",
+    });
+  };
+
   return (
     <div className="p-5 box-border">
       <div className="mb-4">
@@ -43,17 +56,34 @@ function App() {
           onChange={handleInputChange}
         />
         <button
-          className="ml-4 bg-blue-400 p-1 rounded-md text-white"
+          className="ml-4 bg-blue-400 p-1 rounded-md text-white transition duration-300 ease-in-out hover:bg-blue-500"
           onClick={handleAddButton}
         >
           Adicionar
         </button>
       </div>
       <hr />
+
+      <button
+        className="mt-4 bg-blue-400 p-1 rounded-md text-white transition duration-300 ease-in-out hover:bg-blue-500"
+        onClick={handleOrderButton}
+      >
+        Ordenar
+      </button>
+      <br />
+
       <span className="block pt-4">Lista de Pessoas:</span>
       <ul>
         {list.map((item, index) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={index}>
+            {item.name}
+            <button
+              className="ml-2 text-rose-500 transition duration-300 ease-in-out hover:text-rose-700"
+              onClick={() => deletePerson(item.id)}
+            >
+              [ deletar ]
+            </button>
+          </li>
         ))}
       </ul>
     </div>

@@ -33,14 +33,21 @@ const reducer = (state: Person[], action: ReducerEstate) => {
       break;
     case "DEL":
       if (action.payload?.id) {
-        state = state.filter((person) => person.id !== action.payload?.id);
+        let newState = [...state];
+        newState = newState.filter(
+          (person) => person.id !== action.payload?.id
+        );
+        return newState;
       }
 
       break;
     case "ORDER":
-      state = state.sort((previous, current) =>
+      let newState = [...state];
+      newState = newState.sort((previous, current) =>
         previous.name > current.name ? 1 : -1
       );
+
+      return newState;
 
       break;
   }
