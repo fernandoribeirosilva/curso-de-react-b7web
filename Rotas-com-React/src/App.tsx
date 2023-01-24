@@ -3,6 +3,7 @@ import { About } from "./pages/About";
 import { AboutFernando } from './pages/AboutFernando';
 import { AboutPedro } from "./pages/AboutPedro";
 import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound";
 
 
 export function App() {
@@ -19,6 +20,7 @@ export function App() {
           <Route path="/sobre" element={<About />} />
           <Route path="/sobre/fernando" element={<AboutFernando />} />
           <Route path="/sobre/pedro" element={<AboutPedro />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
       </div>
