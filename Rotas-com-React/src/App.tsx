@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { About } from "./pages/About";
-import { AboutFernando } from './pages/AboutFernando';
-import { AboutPedro } from "./pages/AboutPedro";
+import { AboutItem } from './pages/AboutItem';
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 
@@ -18,8 +17,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<About />} />
-          <Route path="/sobre/fernando" element={<AboutFernando />} />
-          <Route path="/sobre/pedro" element={<AboutPedro />} />
+          <Route path="/sobre/:slug" element={<AboutItem />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
